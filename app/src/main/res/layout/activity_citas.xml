@@ -60,7 +60,7 @@ android:padding="10dp"
         <Button
             android:id="@+id/btnNuevaCita"
             android:layout_width="wrap_content"
-            android:layout_height="57dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="start|top"
             android:background="@drawable/button"
             android:padding="20dp"
