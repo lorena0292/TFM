@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "952391787841",
+    "project_id": "beaestils",
+    "storage_bucket": "beaestils.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952391787841:android:20968d5987a6618cda6dc0",
+        "android_client_info": {
+          "package_name": "com.example.beaEstilsApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBANt_HSW-SOoZyeOF9-Qb5_UjkvL1Nua0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
