@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Bea Estils App</string>
+    <string name="str_citas">Citas</string>
+    <string name="str_calendario">Calendario</string>
+    <string name="str_servicios">Servicios</string>
+    <string name="str_clientes">Clientes</string>
+    <string name="str_citasPendientes">Próximas Citas</string>
+    <string name="str_nuevaCita">Nueva Cita</string>
+    <string name="str_buscarCita">Buscar Cita</string>
+    <string name="str_cliente">Client@</string>
+    <string name="str_mechas">Mechas</string>
+    <string name="str_cortar">Cortar</string>
+    <string name="str_tinte">Tinte</string>
+    <string name="str_lavarMarcar">Lavar y Marcar</string>
+    <string name="str_extraLargo">+Largo</string>
+    <string name="str_hombre">Hombre</string>
+    <string name="str_corto">-Corto</string>
+    <string name="str_alisado">Alisado</string>
+    <string name="str_tratamiento">Tratamiento</string>
+    <string name="str_guardar">Guardar</string>
+    <string name="str_tiempo">Tiempo estimado</string>
+    <string name="str_horas">Horas</string>
+</resources>
