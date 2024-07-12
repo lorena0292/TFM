@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="32dp"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/dcLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_gravity="center|end"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo"
+
+        android:padding="10dp"
+        tools:ignore="UseAppTint"
+
+        />
+        <TextView
+            android:id="@+id/txtNuevoCliente"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/str_nuevoCliente"
+            android:textAllCaps="true"
+            android:layout_gravity="center|start"
+            android:textStyle="bold"
+            android:textColor="@color/purple"
+            android:textSize="50dp"
+            />
+    </FrameLayout>
+
+    <ScrollView
+        android:id="@+id/scDatos"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/dcLayout">
+
+        <LinearLayout
+            android:id="@+id/datos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:text="@string/str_nombre"
+                android:textColor="@color/purple"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/EditNombre"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Lorena"
+                android:inputType="textPersonName">
+
+            </EditText>
+
+            <TextView
+                android:id="@+id/txtApellidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:text="@string/str_apellidos"
+                android:textColor="@color/purple"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/EditApellidos"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Sánchez Sánchez"
+                android:inputType="textPersonName">
+            </EditText>
+
+            <TextView
+                android:id="@+id/txtTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:text="@string/str_telefono"
+                android:textColor="@color/purple"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/EditTelefono"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="9687456985"
+                android:inputType="textPersonName">
+            </EditText>
+            <TextView
+                android:id="@+id/txtMail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_mail"
+                android:textSize="30sp"
+                android:textColor="@color/purple"
+                android:textStyle="bold"  />
+            <EditText
+                android:id="@+id/EditMail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="lorena0292@gmail.com"
+                android:inputType="textPersonName">
+            </EditText>
+            <TextView
+                android:id="@+id/txtDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_direccion"
+                android:textSize="30sp"
+                android:textColor="@color/purple"
+                android:textStyle="bold"  />
+            <EditText
+                android:id="@+id/EditDireccion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Calle consolat de mar 7. La vall d'Uixó"
+                android:inputType="textPersonName">
+            </EditText>
+            <TextView
+                android:id="@+id/txtGenero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_genero"
+                android:textSize="30sp"
+                android:textColor="@color/purple"
+                android:textStyle="bold"  />
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rbHombre"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/str_hombre"
+                android:textSize="28sp"
+                android:layout_gravity="center|start"
+                />
+            <RadioButton
+                android:id="@+id/rbMujer"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/str_mujer"
+                android:textSize="28sp"
+                android:layout_gravity="center|end"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </ScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/scDatos"
+
+        >
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:padding="20dp"
+        android:text="@string/str_guardar"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+
+
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

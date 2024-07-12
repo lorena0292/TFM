@@ -26,9 +26,15 @@
             android:name=".Citas"
             android:exported="false" />
 
-    <activity
-        android:name=".NuevaCita"
-        android:exported="false" />
+        <activity
+            android:name=".NuevaCita"
+            android:exported="false" />
+        <activity
+            android:name=".Clientes"
+            android:exported="false" />
+        <activity
+            android:name=".NuevoCliente"
+            android:exported="false" />
 
 </application>
 

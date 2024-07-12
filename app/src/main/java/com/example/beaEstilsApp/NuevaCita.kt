@@ -42,6 +42,7 @@ class NuevaCita : AppCompatActivity() {
         initComponents()
         initListeners()
         leeColeccion()
+        calculaTiempo()
     }
 
 
@@ -87,10 +88,23 @@ class NuevaCita : AppCompatActivity() {
     }
 
     public fun calculaTiempo() {
+
+        val servicios = db.collection("servicio")
+
+        val doc_mechas = servicios.whereEqualTo("nombre", "mechas")
+        Log.d("Tiempo de mechas", "${doc_mechas}")
+
         cbMechas.setOnCheckedChangeListener { _, isChecked ->
-            // if (isChecked) tiempo+=
-
-
+            //   if (isChecked) tiempo+=
+            val doc_mechas = servicios.whereEqualTo("nombre", "mechas")
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        val min = "${document.data.getValue("minutos")}"
+                        Log.d("mechas", "${min}")
+                        if (document.data.getValue("nombre") == "mechas") txtHoras.text = min
+                    }
+                }
         }
     }
 }
