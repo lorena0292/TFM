@@ -6,18 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-
-
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
@@ -29,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     //Elementos
     private lateinit var btnCitas: Button
-
+    private lateinit var btnClientes: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initComponents() {
         btnCitas=findViewById(R.id.btnCitas)
+        btnClientes=findViewById(R.id.btnClientes)
     }
 
     private fun initListeners(){

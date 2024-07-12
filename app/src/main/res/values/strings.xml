@@ -5,8 +5,11 @@
     <string name="str_servicios">Servicios</string>
     <string name="str_clientes">Clientes</string>
     <string name="str_citasPendientes">Próximas Citas</string>
+    <string name="str_clientesPendientes">Próximos Clientes</string>
     <string name="str_nuevaCita">Nueva Cita</string>
     <string name="str_buscarCita">Buscar Cita</string>
+    <string name="str_nuevoCliente">Nuevo Cliente</string>
+    <string name="str_buscarCliente">Buscar Cliente</string>
     <string name="str_cliente">Client@</string>
     <string name="str_mechas">Mechas</string>
     <string name="str_cortar">Cortar</string>
@@ -20,4 +23,11 @@
     <string name="str_guardar">Guardar</string>
     <string name="str_tiempo">Tiempo estimado</string>
     <string name="str_horas">Horas</string>
+    <string name="str_nombre">Nombre:</string>
+    <string name="str_apellidos">Apellidos:</string>
+    <string name="str_telefono">Teléfono:</string>
+    <string name="str_mail">Mail:</string>
+    <string name="str_genero">Género:</string>
+    <string name="str_mujer">Mujer</string>
+    <string name="str_direccion">Dirección:</string>
 </resources>
