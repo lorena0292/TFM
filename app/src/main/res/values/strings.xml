@@ -22,7 +22,6 @@
     <string name="str_tratamiento">Tratamiento</string>
     <string name="str_guardar">Guardar</string>
     <string name="str_tiempo">Tiempo estimado</string>
-    <string name="str_horas">Horas</string>
     <string name="str_nombre">Nombre:</string>
     <string name="str_apellidos">Apellidos:</string>
     <string name="str_telefono">Teléfono:</string>
@@ -30,4 +29,12 @@
     <string name="str_genero">Género:</string>
     <string name="str_mujer">Mujer</string>
     <string name="str_direccion">Dirección:</string>
+    <string name="str_dia">Selecciona el día</string>
+    <string name="str_hora">Selecciona la hora</string>
+    <string name="str_fecha">Fecha</string>
+    <string name="str_lista_servicios">Servicios contratados</string>
+    <string name="str_cliente_guardado">Client@</string>
+    <string name="str_dia_sel">Día: dd/mm/aaaa"</string>
+    <string name="str_hora_sel">Hora: 00:00"</string>
+
 </resources>
