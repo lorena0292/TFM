@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-android:padding="10dp"
+        android:padding="10dp"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -59,7 +59,8 @@ android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -75,7 +76,7 @@ android:padding="10dp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/EditCliente"
+                android:id="@+id/etCliente"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/str_cliente"
@@ -226,7 +227,7 @@ android:padding="10dp"
                 android:id="@+id/txtTiempo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/str_horas"
+                android:text="@string/str_tiempo"
                 android:textSize="30sp"
                 tools:layout_editor_absoluteX="106dp"
                 tools:layout_editor_absoluteY="496dp" />
@@ -237,11 +238,46 @@ android:padding="10dp"
                 android:layout_height="wrap_content"
                 android:stepSize="1"
                 android:valueFrom="0"
-                android:valueTo="6"
+                android:valueTo="360"
                 android:scrollbarSize="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/scServicios" />
+            <TextView
+                android:id="@+id/txtFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:text="@string/str_fecha"
+                android:textAllCaps="true"
+                android:textColor="@color/purple"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+            <FrameLayout
+                android:id="@+id/dcLayoutDiaHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="top"
+                android:orientation="horizontal"
 
-
+                >
+            <EditText
+                android:id="@+id/etFecha"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center|start"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/str_dia"/>
+            <EditText
+                android:id="@+id/etHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/str_hora"/>
+            </FrameLayout>
         </LinearLayout>
 
     </ScrollView>
