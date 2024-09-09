@@ -31,16 +31,18 @@ class NuevoCliente : AppCompatActivity() {
     lateinit var mail: String
     lateinit var direccion: String
     lateinit var telefono: String
-    lateinit var genero: String
+    var genero: String = "Mujer"
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
+    val coleccion_clientes = db.collection("clientes")
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_nueva_cita)
+        setContentView(R.layout.activity_nuevo_cliente)
 
         initComponents()
         initListeners()
@@ -65,51 +67,44 @@ class NuevoCliente : AppCompatActivity() {
         btGuardar.setOnClickListener {
             val intent = Intent(this, Clientes::class.java)
 
-            guardarRegistro()
+            radioGroup?.setOnCheckedChangeListener { group, checkedId ->
+                comprobarGenero(checkedId)
+            }
+            guardarCliente()
+
             startActivity(intent)
         }
     }
 
-    public fun guardarRegistro() {
 
+    public fun guardarCliente() {
 
         nombre = txtNombre.text.toString()
         apellidos = txtApellidos.text.toString()
         telefono = txtTelefono.text.toString()
         mail = txtMail.text.toString()
         direccion = txtDireccion.text.toString()
-        comprobarGenero()
+        val cliente= Cliente(nombre,apellidos, direccion, genero, mail, telefono)
 
-        val cliente = hashMapOf(
-            "nombre" to nombre,
-            "apellidos" to apellidos,
-            "telefono" to telefono,
-            "mail" to mail,
-            "direccion" to direccion,
-            "genero" to genero
-        )
-
-        db.collection("clientes")
+        coleccion_clientes
             .add(cliente)
             .addOnSuccessListener { documentReference ->
-                Log.d("TAG", "DocumentSnapshot escrito con ID: ${documentReference.id}")
+                Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
                 Log.w("TAG", "Error añadiendo documento", e)
             }
     }
 
-    public fun comprobarGenero() {
-        radioGroup?.setOnCheckedChangeListener { group, checkedId ->
-
+    public fun comprobarGenero(checkedId:Int) {
             when (checkedId) {
                 R.id.rbHombre -> {
-                    genero = rbHombre.text.toString()
+                    genero = "Hombre"
                 }
                 R.id.rbMujer -> {
-                    genero = rbMujer.text.toString()
+                    genero = "Mujer"
                 }
             }
-        }
+
     }
 }

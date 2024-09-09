@@ -38,6 +38,9 @@
         <activity
             android:name=".Resultado"
             android:exported="false" />
+        <activity
+            android:name=".ListarClientes"
+            android:exported="false" />
 
 </application>
 

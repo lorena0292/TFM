@@ -11,7 +11,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.slider.RangeSlider
 import com.google.firebase.Firebase
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.firestore
 
 
@@ -43,13 +42,12 @@ class NuevaCita : AppCompatActivity() {
     var hora:String="00:00"
 
 
-    // Access a Cloud Firestore instance from your Activity
+    // BDD
     val db = Firebase.firestore
-    val servicios = db.collection("servicios")
-    val citas=db.collection("citas")
+    val coleccion_servicios = db.collection("servicios")
+    val coleccion_citas=db.collection("citas")
 
-    var mDatabase = FirebaseDatabase.getInstance()
-    var mDatabaseReference = mDatabase.getReference()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -118,14 +116,14 @@ class NuevaCita : AppCompatActivity() {
                 dia=etFecha.text.toString()
                 hora=etHora.text.toString()
 
-                val clienteCita = Cliente(
+                val cita = Cita(
                     cliente,
                     dia,
                     hora,
                     tiempo,
                     listaServicios,
                 )
-                guardaEnBDD(clienteCita)
+                guardaEnBDD(cita)
 
                 intent.putExtra("cliente",cliente)
                 intent.putExtra("listaServicios",listaServicios)
@@ -177,7 +175,7 @@ class NuevaCita : AppCompatActivity() {
 
 public fun getMinutos(n:String){
 
-    val doc = servicios.whereEqualTo("nombre", n)
+    val doc = coleccion_servicios.whereEqualTo("nombre", n)
         .get()
         .addOnSuccessListener { result ->
             for (document in result) {
@@ -196,9 +194,9 @@ public fun getMinutos(n:String){
         return true
     }
 
-    public fun guardaEnBDD(cliente:Cliente){
-        db.collection("citas")
-            .add(cliente)
+    public fun guardaEnBDD(cita: Cita){
+        coleccion_citas
+            .add(cita)
             .addOnSuccessListener { documentReference ->
                 Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
             }

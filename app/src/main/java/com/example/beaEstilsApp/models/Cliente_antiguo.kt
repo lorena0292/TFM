@@ -5,7 +5,7 @@ enum class GeneroClientes {
     MUJER, HOMBRE
 }
 
-data class Cliente(var nombre:String,
+data class ClienteAntiguo(var nombre:String,
                    var genero:GeneroClientes,
                    var apellidos:String,
                    var telefono:String,

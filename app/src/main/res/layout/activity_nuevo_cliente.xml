@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="16dp"
     android:paddingVertical="32dp"
-    tools:context=".MainActivity">
+    tools:context=".NuevoCliente">
 
     <FrameLayout
         android:id="@+id/dcLayout"
@@ -174,7 +174,8 @@ android:padding="10dp"
                 android:layout_height="wrap_content"
                 android:text="@string/str_mujer"
                 android:textSize="28sp"
-                android:layout_gravity="center|end"/>
+                android:layout_gravity="center|end"
+                android:checked="true"/>
             </RadioGroup>
 
         </LinearLayout>

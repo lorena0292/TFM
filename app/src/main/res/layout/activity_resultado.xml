@@ -27,13 +27,25 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txtTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Nueva cita guardada"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textSize="40dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:layout_marginBottom="20dp"
 
+                />
 
             <ImageView
                 android:id="@+id/logo"
                 android:layout_gravity="center"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@drawable/logo_splash"
                 android:padding="10dp"
                />
@@ -75,6 +87,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtTituloDia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:text="Día"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+
+                />
+            <TextView
                 android:id="@+id/txtDia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,15 +128,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvCliente">
         <TextView
-            android:id="@+id/txtHora"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/str_hora_sel"
+            android:id="@+id/txtTituloHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
+            android:text="Día"
+            android:textAlignment="center"
             android:textSize="30dp"
-            android:layout_margin="10dp"
             android:textColor="@color/white"
+
+            />
+        <TextView
+            android:id="@+id/txtHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:text="@string/str_hora_sel"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
             />
 
 
