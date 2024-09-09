@@ -2,20 +2,16 @@ package com.example.beaEstilsApp
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beaEstilsApp.adapters.ClientesAdapter
-import com.example.beaEstilsApp.models.ClienteResponseItem
-import com.example.beaEstilsApp.service.RetrofitServiceFactory
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
-import kotlinx.coroutines.launch
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class Clientes : AppCompatActivity() {
 
@@ -25,13 +21,15 @@ class Clientes : AppCompatActivity() {
 
     //Recycler clientes
     private lateinit var rvClientes: RecyclerView
+    private lateinit var clientesArrayList:ArrayList<Cliente>
     private lateinit var clientesAdapter: ClientesAdapter
 
-    private val clientesInit= mutableListOf<ClienteResponseItem>()
+   // private val clientesInit= mutableListOf<ClienteResponseItem>()
 
 
     // Access a Cloud Firestore instance from your Activity
-    val db = Firebase.firestore
+
+    val coleccionClientes = FirebaseDatabase.getInstance().getReference("clientes")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,48 +40,53 @@ class Clientes : AppCompatActivity() {
         initListeners()
 
 
-        //Montamos el recycler de pets
-        clientesAdapter = ClientesAdapter(clientesInit)
+        //Montamos el recycler de clientes
+
         rvClientes.layoutManager = LinearLayoutManager(this)
-        rvClientes.adapter = clientesAdapter
 
-        //Montamos el servicio para lanzar la petición contra el API
-        val apiPets = RetrofitServiceFactory.getClientesRetrofit()
+        clientesArrayList= arrayListOf<Cliente>()
 
-        lifecycleScope.launch {
-            //   val data = apiPets.getPets("cliente")
-            val data = apiPets.getClientes("posts")
-            //Relleno los datos desde la respuesta
-            val clientesData = data
-            //Borro datos del RecyclerView
-            clientesInit.clear()
-            clientesInit.addAll(clientesData)
-            //Repinta RecyclerView
-            clientesAdapter.notifyDataSetChanged()
-        }
     }
 
 
     private fun initComponents() {
         btnNuevoCliente = findViewById(R.id.btnNuevoCliente)
         btnBuscarCliente = findViewById(R.id.btnBuscarCliente)
-
+        rvClientes = findViewById(R.id.rvClientes)
     }
 
     private fun initListeners() {
-
-        rvClientes = findViewById(R.id.rvClientes)
 
         btnNuevoCliente.setOnClickListener{
             val intent = Intent(this, NuevoCliente::class.java)
             startActivity(intent)
         }
         btnBuscarCliente.setOnClickListener{
-            val intent = Intent(this, NuevoCliente::class.java)
+            val intent = Intent(this, ListarClientes::class.java)
             startActivity(intent)
         }
+        getCliente()
 
 
+    }
+
+    private fun getCliente(){
+        coleccionClientes.addValueEventListener(object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (clienteSnapshot in snapshot.children){
+                        val cliente=clienteSnapshot.getValue(Cliente::class.java)
+                        clientesArrayList.add(cliente!!)
+                    }
+                    rvClientes.adapter=ClientesAdapter(clientesArrayList)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 }

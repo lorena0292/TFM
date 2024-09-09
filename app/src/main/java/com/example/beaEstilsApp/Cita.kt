@@ -1,4 +1,9 @@
 package com.example.beaEstilsApp
 
-class Cita {
-}
+data class Cita(
+    val cliente: String? = null,
+    val dia: String? = null,
+    val hora: String? = null,
+    val tiempo: Int? = null,
+    val servicios : ArrayList<String>? = null,
+)

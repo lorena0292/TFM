@@ -51,6 +51,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Citas::class.java)
             startActivity(intent)
         }
+        //ingreso a citas
+        btnClientes.setOnClickListener{
+            val intent = Intent(this, Clientes::class.java)
+            startActivity(intent)
+        }
     }
 
 

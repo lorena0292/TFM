@@ -1,3 +1,5 @@
 package com.example.beaEstilsApp.models
 
-class ClienteResponse : ArrayList<ClienteResponseItem>()
+import com.example.beaEstilsApp.Cliente
+
+class ClienteResponse : ArrayList<Cliente>()
