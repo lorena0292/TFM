@@ -86,14 +86,13 @@ class NuevoCliente : AppCompatActivity() {
         direccion = txtDireccion.text.toString()
         val cliente= Cliente(nombre,apellidos, direccion, genero, mail, telefono)
 
-        coleccion_clientes
-            .add(cliente)
-            .addOnSuccessListener { documentReference ->
-                Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w("TAG", "Error añadiendo documento", e)
-            }
+        coleccion_clientes.document(cliente?.telefono ?: " " )
+            .set(cliente)
+            .addOnSuccessListener { Log.d("ok", "DocumentSnapshot successfully written!") }
+            .addOnFailureListener { e -> Log.w("error", "Error writing document", e) }
+
+
+
     }
 
     public fun comprobarGenero(checkedId:Int) {

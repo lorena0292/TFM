@@ -62,7 +62,7 @@ class Clientes : AppCompatActivity() {
             startActivity(intent)
         }
         btnBuscarCliente.setOnClickListener{
-            val intent = Intent(this, ListarClientes::class.java)
+            val intent = Intent(this, BuscarClientes::class.java)
             startActivity(intent)
         }
         getCliente()

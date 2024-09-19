@@ -41,6 +41,13 @@
         <activity
             android:name=".ListarClientes"
             android:exported="false" />
+        <activity
+            android:name=".BuscarClientes"
+            android:exported="false" />
+        <activity
+            android:name=".BuscarCitas"
+            android:exported="false" />
+
 
 </application>
 
