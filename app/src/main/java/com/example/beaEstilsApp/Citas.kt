@@ -10,6 +10,7 @@ class Citas : AppCompatActivity() {
 
     //Elementos
     private lateinit var btnNuevaCita: Button
+    private lateinit var btnBuscarCita: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,7 @@ class Citas : AppCompatActivity() {
 
     private fun initComponents() {
         btnNuevaCita = findViewById(R.id.btnNuevaCita)
+        btnBuscarCita = findViewById(R.id.btnBuscarCita)
     }
 
     private fun initListeners() {
@@ -30,6 +32,10 @@ class Citas : AppCompatActivity() {
         //ingreso a nuevas citas
         btnNuevaCita.setOnClickListener {
             val intent = Intent(this, NuevaCita::class.java)
+            startActivity(intent)
+        }
+        btnBuscarCita.setOnClickListener {
+            val intent = Intent(this, BuscarCitas::class.java)
             startActivity(intent)
         }
     }

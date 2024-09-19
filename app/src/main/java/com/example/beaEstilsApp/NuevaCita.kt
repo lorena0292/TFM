@@ -35,7 +35,8 @@ class NuevaCita : AppCompatActivity() {
     lateinit var btnGuardar: Button
 
     var min: Float =0.0F
-    var cliente:String=""
+    var cliente:Cliente=Cliente()
+    //var cliente:String=""
     var listaServicios:ArrayList<String>? = null
     var tiempo: Int = 0
     var dia: String= "dd/mm/aaaa"
@@ -46,6 +47,7 @@ class NuevaCita : AppCompatActivity() {
     val db = Firebase.firestore
     val coleccion_servicios = db.collection("servicios")
     val coleccion_citas=db.collection("citas")
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,7 +113,7 @@ class NuevaCita : AppCompatActivity() {
         btnGuardar.setOnClickListener {
             if(comprobarCampos()){
                 val intent = Intent(this, Resultado::class.java)
-                cliente=etCliente.text.toString()
+                cliente.telefono=etCliente.text.toString()
                 listaServicios= arrayListOf("")
                 dia=etFecha.text.toString()
                 hora=etHora.text.toString()
@@ -125,7 +127,7 @@ class NuevaCita : AppCompatActivity() {
                 )
                 guardaEnBDD(cita)
 
-                intent.putExtra("cliente",cliente)
+                intent.putExtra("cliente",cliente.telefono)
                 intent.putExtra("listaServicios",listaServicios)
                 intent.putExtra("dia",dia)
                 intent.putExtra("hora",hora)
@@ -152,7 +154,7 @@ class NuevaCita : AppCompatActivity() {
     }
 
     public fun calculaTiempo() {
-        val servicios = db.collection("servicios")
+
         val nombreServicio = ""
         for (cb in cbs) {
             cb.setOnCheckedChangeListener { _, isChecked ->
@@ -203,6 +205,9 @@ public fun getMinutos(n:String){
             .addOnFailureListener { e ->
                 Log.w("TAG", "Error añadiendo documento", e)
             }
+
+
+
     }
    }
 

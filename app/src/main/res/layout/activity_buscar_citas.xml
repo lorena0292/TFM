@@ -4,16 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BuscarClientes">
+    tools:context=".BuscarCitas">
+    <FrameLayout
+        android:id="@+id/dcLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="top"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
 
+        >
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_gravity="center|end"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo"
+
+            android:padding="10dp"
+            tools:ignore="UseAppTint"
+
+            />
+        <TextView
+            android:id="@+id/txtBuscarCitas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_citas"
+            android:textAllCaps="true"
+            android:layout_gravity="center|start"
+            android:textStyle="bold"
+            android:textColor="@color/purple"
+            android:textSize="50dp"
+            />
+    </FrameLayout>
     <SearchView
         android:id="@+id/idSV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginTop="120dp"
         android:iconifiedByDefault="false"
         android:padding="4dp"
-        android:queryHint="Buscar clientes" />
+        android:queryHint="Buscar citas" />
 
     <!--List View from which data is to be searched
          for different programming languages-->
