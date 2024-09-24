@@ -32,7 +32,7 @@
     <string name="str_dia">Selecciona el día</string>
     <string name="str_hora">Selecciona la hora</string>
     <string name="str_fecha">Fecha</string>
-    <string name="str_lista_servicios">Servicios contratados</string>
+    <string name="str_lista_servicios">Servicios contratados:</string>
     <string name="str_cliente_guardado">Client@</string>
     <string name="str_dia_sel">dd/mm/aaaa"</string>
     <string name="str_hora_sel">00:00"</string>
