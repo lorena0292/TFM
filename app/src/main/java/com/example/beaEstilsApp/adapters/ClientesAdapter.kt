@@ -5,10 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beaEstilsApp.Cliente
 import com.example.beaEstilsApp.R
-import com.example.beaEstilsApp.models.ClienteResponseItem
 import com.example.beaEstilsApp.views.ClientesViewHolder
 
-class ClientesAdapter (private val clientes: ArrayList<Cliente>): RecyclerView.Adapter<ClientesViewHolder>() {
+class ClientesAdapter(private val clientes: ArrayList<Cliente>): RecyclerView.Adapter<ClientesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientesViewHolder {
 

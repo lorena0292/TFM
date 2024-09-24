@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/resultado"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="16dp"
@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toStartOf="@id/cvServicios"
         app:cardBackgroundColor="@color/purple"
         app:cardCornerRadius="16dp"
-        android:layout_marginEnd="16dp">
+        >
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/Layout_inicio"
             android:layout_width="match_parent"
@@ -72,7 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+  android:layout_marginEnd="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/cvHora"
         app:layout_constraintTop_toBottomOf="@id/cvCliente"
@@ -114,26 +114,32 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!--EDAD-->
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvHora"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+
         app:cardBackgroundColor="@color/purple"
         app:cardCornerRadius="16dp"
-
+android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@id/cvCliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvCliente">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
         <TextView
             android:id="@+id/txtTituloHora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:text="Día"
+            android:text="Hora"
             android:textAlignment="center"
             android:textSize="30dp"
             android:textColor="@color/white"
@@ -152,7 +158,7 @@
             android:layout_margin="10dp"
             />
 
-
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
@@ -161,13 +167,28 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvHora"
         app:cardBackgroundColor="@color/purple"
         app:cardCornerRadius="16dp">
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtTituloServicios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/str_lista_servicios"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"/>
         <TextView
             android:id="@+id/txtListaServicios"
             android:layout_width="match_parent"
@@ -179,6 +200,7 @@
             android:gravity="center"
             android:layout_gravity="center_vertical"
             android:textColor="@color/white"/>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 

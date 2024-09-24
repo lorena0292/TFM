@@ -12,6 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.slider.RangeSlider
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 
 class NuevaCita : AppCompatActivity() {
@@ -34,19 +40,20 @@ class NuevaCita : AppCompatActivity() {
     lateinit var etHora:EditText
     lateinit var btnGuardar: Button
 
-    var min: Float =0.0F
+   // var min: Float =0.0F
     var cliente:Cliente=Cliente()
     //var cliente:String=""
-    var listaServicios:ArrayList<String>? = null
+    var listaServicios:ArrayList<String> = arrayListOf<String>()
     var tiempo: Int = 0
     var dia: String= "dd/mm/aaaa"
     var hora:String="00:00"
-
+    var min= 0
 
     // BDD
     val db = Firebase.firestore
     val coleccion_servicios = db.collection("servicios")
     val coleccion_citas=db.collection("citas")
+    val coleccion_clientes = db.collection("clientes")
 
 
 
@@ -86,22 +93,36 @@ class NuevaCita : AppCompatActivity() {
             if (tiempo == 0) {
                 txtHoras.text = "Menos de 1 hora"
             } else {
-                txtHoras.text = " ${tiempo.toString()} minutossssss"
+                txtHoras.text = " ${tiempo.toString()} minutos"
             }
 
         }
-        // calculaTiempo()
+        calculaTiempo()
         //Checkboxes Servicios Listeners
+        /*
         cbMechas.setOnCheckedChangeListener { _, isChecked ->
-            getMinutos("Mechas")
+
+
+            coleccion_servicios
+                .whereEqualTo("nombre", "Mechas")
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        min = "${document.data.getValue("minutos")}".toInt()
+                    }
+                }
+
             if (isChecked) {
-                suma(min.toInt())
+                tiempo+=min
                 txtHoras.text = "${tiempo.toString()} minutos"
+                rngTiempo.setValues(tiempo.toFloat())
             } else {
-                resta(min.toInt())
+                tiempo-=min
                 txtHoras.text = "${tiempo.toString()} minutos"
+                rngTiempo.setValues(tiempo.toFloat())
             }
         }
+        */
 
         //Cliente listener
         etCliente.setOnClickListener {}
@@ -113,35 +134,46 @@ class NuevaCita : AppCompatActivity() {
         btnGuardar.setOnClickListener {
             if(comprobarCampos()){
                 val intent = Intent(this, Resultado::class.java)
-                cliente.telefono=etCliente.text.toString()
-                listaServicios= arrayListOf("")
                 dia=etFecha.text.toString()
                 hora=etHora.text.toString()
+                val cli=coleccion_clientes.document(etCliente.text.toString())
+                GlobalScope.launch(Dispatchers.IO) {
+                    delay(3000L)
+                    cliente = cli.get().await().toObject(Cliente::class.java)!!
+                    withContext(Dispatchers.Main) {
+                        Log.d("cliente", "${cliente.nombre}, ${cliente.apellidos}, ${cliente.telefono}")
+                        val cita = Cita(
+                            cliente.telefono,
+                            dia,
+                            hora,
+                            tiempo,
+                            listaServicios,
+                        )
+                        guardaEnBDD(cita)
 
-                val cita = Cita(
-                    cliente,
-                    dia,
-                    hora,
-                    tiempo,
-                    listaServicios,
-                )
-                guardaEnBDD(cita)
+                        intent.putExtra("cliente",cliente.getClienteString())
+                        intent.putExtra("listaServicios",listaServicios)
+                        intent.putExtra("dia",dia)
+                        intent.putExtra("hora",hora)
+                        startActivity(intent)
+                    }
+                }
+               // cliente.getClienteByTelefono(etCliente.text.toString())
+               // Log.d("clienteBuscado", "${cliente.nombre}, ${cliente.apellidos}, ${cliente.telefono}")
 
-                intent.putExtra("cliente",cliente.telefono)
-                intent.putExtra("listaServicios",listaServicios)
-                intent.putExtra("dia",dia)
-                intent.putExtra("hora",hora)
-                startActivity(intent)
+
+
+
             }
         }
     }
 
     private fun showDatePickerDialog() {
-        val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year) }
+        val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month+1, year) }
         datePicker.show(supportFragmentManager, "datePicker")
     }
     private fun onDateSelected(day: Int, month: Int, year: Int) {
-        etFecha.setText("Día: $day / $month / $year")
+        etFecha.setText("$day/$month/$year")
     }
 
     private fun showTimePickerDialog() {
@@ -150,7 +182,7 @@ class NuevaCita : AppCompatActivity() {
     }
 
     private fun onTimeSelected(time: String) {
-        etHora.setText("Hora: $time")
+        etHora.setText("$time")
     }
 
     public fun calculaTiempo() {
@@ -158,31 +190,56 @@ class NuevaCita : AppCompatActivity() {
         val nombreServicio = ""
         for (cb in cbs) {
             cb.setOnCheckedChangeListener { _, isChecked ->
+                var opcion=cb.text.toString()
                 if (isChecked) {
-                    getMinutos(cb.text.toString())
-                    tiempo += min.toInt()
+                    min=getMinutos(opcion)
+                    suma(min)
                     rngTiempo.setValues(tiempo.toFloat())
-                    txtHoras.text = "${tiempo.toString()} minutitos"
+                    txtHoras.text = "${tiempo.toString()} minutos"
+                    listaServicios.add(opcion)
                 }
                 else  {
-                    getMinutos(cb.text.toString())
-                    val t=tiempo - min.toInt()
-                        tiempo = t
-                        rngTiempo.setValues(tiempo.toFloat())
-                        txtHoras.text = "${tiempo.toString()} minutos"
+                    min=getMinutos(opcion)
+                    listaServicios.remove(opcion)
+                    //val t=tiempo - min.toInt()
+                       // tiempo = t
+                    resta(min)
+                    rngTiempo.setValues(tiempo.toFloat())
+                    txtHoras.text = "${tiempo.toString()} minutos"
                 }
             }
         }
     }
 
-public fun getMinutos(n:String){
 
-    val doc = coleccion_servicios.whereEqualTo("nombre", n)
+public fun getMinutos(n:String):Int{
+/*
+    coleccion_servicios
         .get()
         .addOnSuccessListener { result ->
             for (document in result) {
-                min = "${document.data.getValue("minutos")}".toFloat()
-    }}}
+              var nombre=document.data.getValue("nombre").toString()
+              if(nombre==n)
+                  min = "${document.data.getValue("minutos")}".toInt()
+    }}
+return min
+    */
+
+    when(n){
+        "Mechas" -> return 120
+        "Hombre" -> return -15
+        "Lavar y Marcar" -> return 30
+        "Cortar" -> return 30
+        "Tratamiento" -> return 45
+        "Alisado" -> return 240
+        "Tinte" -> return 20
+        "+Largo" -> return 40
+        "-Corto" -> return -10
+
+    }
+    return 0
+
+}
 
     public fun suma(cantidad: Int){
         tiempo+=cantidad
@@ -209,5 +266,7 @@ public fun getMinutos(n:String){
 
 
     }
+
+
    }
 

@@ -104,6 +104,7 @@
         android:textSize="20dp"
         />
 
+
 </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvClientes"
@@ -117,6 +118,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/light_purple"
         tools:listitem="@layout/item_cliente"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
