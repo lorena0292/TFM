@@ -1,8 +1,10 @@
 package com.example.beaEstilsApp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.SearchView
 import android.widget.Toast
@@ -14,7 +16,7 @@ public class BuscarClientes: AppCompatActivity(){
     // on below line we are
     // creating variables for listview
     lateinit var clientesLV: ListView
-
+    lateinit var logo: ImageView
     // creating array adapter for listview
     lateinit var listAdapter: ArrayAdapter<String>
 
@@ -37,7 +39,11 @@ public class BuscarClientes: AppCompatActivity(){
         // initializing variables of list view with their ids.
         clientesLV = findViewById(R.id.idLV)
         searchView = findViewById(R.id.idSV)
-
+        logo=findViewById(R.id.logo)
+        logo.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
         // initializing list
         clientesList = ArrayList()
        creaListaClientes()
@@ -87,7 +93,7 @@ public class BuscarClientes: AppCompatActivity(){
         clientesList = ArrayList()
 
 
-        coleccion_clientes
+        coleccion_clientes.orderBy("nombre")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {

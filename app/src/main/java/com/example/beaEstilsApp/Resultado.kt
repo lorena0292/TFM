@@ -1,6 +1,8 @@
 package com.example.beaEstilsApp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +22,7 @@ class Resultado :AppCompatActivity(){
     private lateinit var txtServicios: TextView
     private lateinit var txtDia: TextView
     private lateinit var txtHora: TextView
-
+    private lateinit var btnOK: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,7 +34,7 @@ class Resultado :AppCompatActivity(){
         }
 
 
-        //Obtain animal from main_activity
+
         val paquete: Bundle? = intent.extras
         cliente = paquete?.getString("cliente")
         if (paquete != null) {
@@ -44,7 +46,7 @@ class Resultado :AppCompatActivity(){
         hora = paquete?.getString("hora")
 
         initComponents()
-
+        initListeners()
     }
 
     fun initComponents(){
@@ -54,11 +56,11 @@ class Resultado :AppCompatActivity(){
         txtServicios = findViewById(R.id.txtListaServicios)
         txtDia = findViewById(R.id.txtDia)
         txtHora = findViewById(R.id.txtHora)
-
+        btnOK=findViewById(R.id.btnOK)
         txtCliente.text = cliente
         var arrayServicios=""
         for (servicio in listaServicios!!){
-            arrayServicios+=servicio
+            arrayServicios+="${servicio}\n"
         }
 
         txtServicios.text=arrayServicios
@@ -68,7 +70,10 @@ class Resultado :AppCompatActivity(){
 
     }
 
-    fun actualizaDatos(){
-
+    public fun initListeners(){
+        btnOK.setOnClickListener{
+            val intent = Intent(this, Citas::class.java)
+            startActivity(intent)
+        }
     }
 }
