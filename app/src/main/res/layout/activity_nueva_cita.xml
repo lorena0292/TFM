@@ -238,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:stepSize="1"
                 android:valueFrom="0"
-                android:valueTo="360"
+                android:valueTo="530"
                 android:scrollbarSize="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/scServicios" />
             <TextView

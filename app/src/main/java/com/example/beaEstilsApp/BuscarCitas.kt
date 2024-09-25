@@ -1,8 +1,10 @@
 package com.example.beaEstilsApp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.SearchView
 import android.widget.Toast
@@ -20,7 +22,7 @@ public class BuscarCitas: AppCompatActivity() {
     // on below line we are
     // creating variables for listview
     lateinit var citasLV: ListView
-
+    lateinit var logo: ImageView
     // creating array adapter for listview
     lateinit var listAdapter: ArrayAdapter<String>
 
@@ -32,10 +34,8 @@ public class BuscarCitas: AppCompatActivity() {
 
 
      var clienteBuscado: Cliente =Cliente()
-    /*  var cita: Cita = Cita("")
-  */
 
-   // var clienteBuscado: Cliente = Cliente()
+
     var cita: Cita = Cita()
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
@@ -48,16 +48,16 @@ public class BuscarCitas: AppCompatActivity() {
         // initializing variables of list view with their ids.
         citasLV = findViewById(R.id.idLV)
         searchView = findViewById(R.id.idSV)
-
+        logo=findViewById(R.id.logo)
         // initializing list
         citasList = ArrayList()
 
 
-
-
-
         //creaListaCitas()
-
+        logo.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         coleccion_citas
             .get()
@@ -218,43 +218,36 @@ public fun continua(){
 
 
 
-                 //  buscarCliente(telefono)
+                    //  buscarCliente(telefono)
                     GlobalScope.launch(Dispatchers.IO) {
                         delay(3000L)
                         var telefono = document.data.getValue("telCliente").toString()
-                        Log.d("tel",telefono)
+                        Log.d("tel", telefono)
                         val cli = coleccion_clientes.document(telefono)
 
-                       // var cliente = Cliente()
-                        clienteBuscado= cli.get().await().toObject(Cliente::class.java)!!
+                        // var cliente = Cliente()
+
 
 
                         withContext(Dispatchers.Main) {
+                            clienteBuscado = cli.get().await().toObject(Cliente::class.java)!!
                             Log.d("cli", clienteBuscado.nombre.toString())
                             cita.telCliente = clienteBuscado.telefono
-                            Log.d("cli",clienteBuscado.nombre.toString())
+                            Log.d("cli", clienteBuscado.nombre.toString())
                             cita.dia = document.data.getValue("dia")?.toString()
                             cita.hora = document.data.getValue("hora")?.toString()
-                            var citaString=cita.getCitaString(clienteBuscado.nombre,clienteBuscado.apellidos)
-                            Log.d("citaString",citaString)
+                            var citaString =
+                                cita.getCitaString(clienteBuscado.nombre, clienteBuscado.apellidos)
+                            Log.d("citaString", citaString)
                             citasList.add(citaString)
-
-                            }
+                            continua()
                         }
-
-
-
-
-
-                   // clienteBuscado=clienteBuscado.getClienteByTelefono(telefono)
-                    //if (clienteBuscado != null)
-
+                    }
                 }
             }
             .addOnFailureListener { exception ->
                 Log.d("Error", "Error getting documents: ", exception)
             }
-
 
     }
 /*

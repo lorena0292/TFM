@@ -91,7 +91,8 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/opciones">
+    app:layout_constraintTop_toBottomOf="@+id/opciones"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/texto"
         android:layout_width="wrap_content"
@@ -102,23 +103,20 @@
         android:textStyle="bold"
         android:textColor="@color/purple"
         android:textSize="20dp"
+        android:layout_marginBottom="20dp"
         />
 
 
-</LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvClientes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/proximosClientes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/light_purple"
-        tools:listitem="@layout/item_cliente"/>
 
+    <ListView
+        android:id="@+id/idLV"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_gravity="top|center"
+        android:background="@color/light_purple"
+        android:fadeScrollbars="false"
+        />
+</LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
